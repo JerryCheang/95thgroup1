@@ -1,7 +1,6 @@
 (() => {
   const progress = document.getElementById('g1-progress-bar');
   const revealItems = document.querySelectorAll('.reveal');
-  const floatingNavHost = document.getElementById('floating-nav');
   const menuHost = document.getElementById('page-menu');
   const menuToggle = document.getElementById('menu-toggle');
   const menuCurrentLabel = document.getElementById('menu-current-label');
@@ -106,7 +105,6 @@
     updateActiveSectionByScroll();
   });
 
-  buildNavLinks(floatingNavHost);
   buildNavLinks(menuHost, { withHome: true });
 
   if (menuToggle && menuHost) {
