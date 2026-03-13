@@ -7,6 +7,7 @@
   const lightbox = document.getElementById('g1-lightbox');
   const lightboxImage = document.getElementById('g1-lightbox-image');
   const lightboxClose = document.getElementById('g1-lightbox-close');
+  const backToTopButton = document.getElementById('g1-back-to-top');
 
   const sectionIds = [
     'hero',
@@ -92,17 +93,24 @@
     if (progress) progress.style.width = `${percent.toFixed(2)}%`;
   };
 
+  const updateBackToTop = () => {
+    if (!backToTopButton) return;
+    backToTopButton.classList.toggle('show', window.scrollY > 360);
+  };
+
   window.addEventListener(
     'scroll',
     () => {
       updateProgress();
       updateActiveSectionByScroll();
+      updateBackToTop();
     },
     { passive: true }
   );
   window.addEventListener('resize', () => {
     updateProgress();
     updateActiveSectionByScroll();
+    updateBackToTop();
   });
 
   buildNavLinks(menuHost, { withHome: true });
@@ -157,6 +165,13 @@
     });
   }
 
+  if (backToTopButton) {
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   updateActiveSectionByScroll();
   updateProgress();
+  updateBackToTop();
 })();
